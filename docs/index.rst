@@ -3,19 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-欢迎来到瞳芯智能文档中心:D
-===============================
+Welcome to Tosee Intelligent Document :D
+========================================
 
 
-Sentry1：入门级视觉传感器
---------------------------------
+Sentry1: Entry-level vision sensor
+----------------------------------
 
 .. toctree::
    :maxdepth: 2
 
    Sentry1/introduction
 
-Sentry2：高性能视觉传感器
+Sentry2: High-performance vision sensor
 --------------------------------
 
 .. toctree::
@@ -23,17 +23,17 @@ Sentry2：高性能视觉传感器
 
    Sentry2/introduction
 
-通讯协议指令
---------------------------------
+Protocol command
+----------------
 
 .. toctree::
    :maxdepth: 2
 
    Protocol/index
 
-问题&贡献
---------------------------------
+FAQ&Contribute
+--------------
 .. toctree::
    :maxdepth: 2
-   
+
    contributing
