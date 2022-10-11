@@ -1,17 +1,18 @@
 .. _chapter_vision_index:
 
-算法介绍
+Vision
 ================
 
-简介
+Brief
 ----------------
-Sentry2视觉传感器集成有多种离线视觉算法，无需网络即可识别物体，板载ESP8285-WiFi芯片可以实现云端识图功能。
+The Sentry2 vision sensor integrates a variety of offline vision algorithms to recognize objects without network, and the on-board ESP8285-WiFi chip can realize the cloud-based image recognition function.
 
-视觉基础
+Visual Basic
 ----------------
 
-* 图像检测
+* Image Detection
     判断画面中是否有某一类目标物体，而不区分这个物体具体内容是什么。比如检测人脸，只需要判断画面中有人脸即可，而无需知道这个人是谁。
+    Determine whether there is a certain type of object in the picture, without distinguishing what the object is. Face detection, for example, only needs to determine that there is a face in the picture, without knowing who the person is.
 
 * 图像识别
     不仅要判断画面中是否有某一类目标物体，还要对这个物体具体的内容进行识别。比如在检测到人脸之后，还需要判断出这个人脸是谁。
@@ -65,183 +66,170 @@ Sentry2视觉传感器集成有多种离线视觉算法，无需网络即可识�
     随着Zoom值的增大，可以看清更远处的物体，但视野范围会缩窄，如果物体移动比较快，则容易跑到视野外面。
 
 
-算法介绍
+Vision Introduction
 ----------------
 
-算法列表
+Vision List
 ************************
 
-================    ================================================    ================    ================
-算法ID               名称                                                 英文名称             简介
-================    ================================================    ================    ================
-1                    :ref:`颜色识别<chapter_vision_color_index>`          Color               最高可设置25个识别区域，返回每个区域中的颜色信息，如R，G，B值及分类标签
-2                    :ref:`色块检测<chapter_vision_blob_index>`           Blob                检测图像中是否有指定的色块，支持黑、白、红、绿、蓝、黄6种色块同时检测 
-3                    :ref:`标签识别*<chapter_vision_apriltag_index>`      Apriltag            支持16H5，25H9,36H11编码的Apriltag标签，可以同时识别最多25个图案
-4                    :ref:`线条检测<chapter_vision_line_index>`           Line                检测图像中的线条，返回两个端点坐标及倾斜角度，可支持1～5个线段检测
-5                    :ref:`深度学习*<chapter_vision_learning_index>`      Learning            对任意物体进行离线训练并进行识别，可存储25个模型数据
-6                    :ref:`卡片识别*<chapter_vision_card_index>`          Card                识别特制的卡片图案，包含10张交通卡片，9张形状卡片，10张数字卡片
-7                    :ref:`人脸识别*<chapter_vision_face_index>`          Face                检测与识别人脸，支持口罩检测，可存储25个模型数据
-8                    :ref:`20类物体*<chapter_vision_20class_index>`       20Class             识别常见的20类物体，如猫、汽车等
-9                    :ref:`二维码<chapter_vision_qrcode_index>`           QrCode              检测与识别简单的二维码
-10                   :ref:`自定义<chapter_vision_custom_index>`           Custom              支持用户自定义算法，运行在板载ESP8285-WiFi芯片内，如云端识图
-11                   :ref:`运动物体<chapter_vision_motion_index>`         Motion              判断图像中是否有移动区域   
-================    ================================================    ================    ================
+================    ================================================    ====================
+Vision ID            Name                                                Brief                                                                                                                           
+================    ================================================    ====================
+1                    :ref:`Color<chapter_vision_color_index>`            Return the R(red),G(green),B(blue) value and its label of each region. Up to 25 regions
+2                    :ref:`Blob<chapter_vision_blob_index>`              Detect a specified color block. It supports black, white, red, green, blue and yellow color blocks setection at the same time
+3                    :ref:`Apriltag<chapter_vision_apriltag_index>`      Support 16H5, 25H9, 36H11 Apriltag family. Up to 25 tags
+4                    :ref:`Line<chapter_vision_line_index>`              Find lines and return its endpoints and degrees, support 1-5 lines
+5                    :ref:`Learning<chapter_vision_learning_index>`      Training objects and categorize them. Up to 25 model data
+6                    :ref:`Card<chapter_vision_card_index>`              Identify special card patterns, including 10 traffic cards, 9 shape cards, and 10 number cards
+7                    :ref:`Face<chapter_vision_face_index>`              Face detection and recognition, support mask detection, can store 25 model data
+8                    :ref:`20Class<chapter_vision_20class_index>`        Classify 20 common objects, such as cat, car, human etc
+9                    :ref:`QrCode<chapter_vision_qrcode_index>`          Recognition a simple QR code
+10                   :ref:`Custom<chapter_vision_custom_index>`          Running custom algorithms which is running in the ESP8285-WiFi chip on board
+11                   :ref:`Motion<chapter_vision_motion_index>`          Determine if there are moving areas in the image
+================    ================================================    ====================
 
-*注意：不带星号的可以同时开启多个，带星号的算法相互之间同时只可开启一个，但可以与不带星号的算法同时运行。同时开启多个算法时，运行速度会有所降低*
+*Note: Multiple visions without asterisks can be enabled at the same time. But the visions with asterisks can not running with other asterisks vision.  
+When multiple algorithms are enabled, the speed will be slowed down*
 
-算法详解
+Detailed Introduction
 ************************
 
 .. _chapter_vision_color_index:
 
-ID:1 颜色识别-Color
+ID:1 Color
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
     .. image:: images/sentry2_vision_color_selecting.png
 
-    用户指定一个或多个识别区域，识别该区域的颜色分类。每个检测位置称为一个识别区域，其位置和大小由用户进行设置，最多25组识别区域，返回该区域的颜色标签信息和实际的红R、绿G、蓝B数值。
+    User can set one or up to 25 regions for color recognition and return the R(red),G(green),B(blue) value and its label of each region. 
+    The coordinate and size of each region can be configured.
 
-* 颜色分类标签
-    Sentry2定义了7种颜色分类标签：
+* Color Label
+    A color label is a number use to represent a color:
 
     .. image:: images/sentry2_vision_label.png
 
-    ================    ================    ================    ================    ================    ================
-    分类标签              英文标识             中文含义              分类标签             英文标识             中文含义
-    ================    ================    ================    ================    ================    ================
-    1                    Black               黑色                2                    White              白色
-    3                    Red                 红色                4                    Green              绿色                
-    5                    Blue                蓝色                6                    Yellow             黄色
-    0                    Unknown             未知
-    ================    ================    ================    ================    ================    ================
+    ================    ================    ================    ================ 
+    Label                Name                Label              Name 
+    ================    ================    ================    ================
+    1                    Black               2                   White 
+    3                    Red                 4                   Green               
+    5                    Blue                6                   Yellow
+    0                    Unknown            
+    ================    ================    ================    ================
 
-    **注意**：由于紫色、青色（蓝绿色）、橙色、灰色等，相对来说容易造成误报，因此这几个颜色部分区间被划分为临近颜色的标签，部分被划分为未知颜色，如果用户确实有这几种颜色的使用需求，可以通过返回参数的R、G、B实际值自行计算与判断
+* Parameters
 
-* 配置参数
-
-    用户需要指定识别区域的坐标和大小，最多可设置25个识别区域，如果没有指定，则默认为图像中心点
-
-    当通过主控设置寄存器参数时，每个识别区域都需要设置以下参数：
+    User can set regions for recognition:
 
     ================    ================================
-    参数                 含义
+    Param               Brief
     ================    ================================
-    1                   识别区域中心x坐标
-    2                   识别区域中心y坐标
-    3                   识别区域宽度w
-    4                   识别区域高度h
-    5                   无
+    1                   X-coordinate of the region center
+    2                   Y-coordinate of the region center
+    3                   Width of the region
+    4                   Height of the region
+    5                   None
     ================    ================================
 
     .. image:: images/sentry2_vision_color_setting.png
 
-    在UI设置页面中，有几种预置的识别区域网格分布形式和识别区域大小：
+    We provide several preset parameters in the UI setting page:
 
-    网格（水平方向数量 x 垂直方向数量）：1x1、2x2、3x3、4x4、5x5、1x10、2x10、6x1、6x2
+    Grid(X x Y): 1x1、2x2、3x3、4x4、5x5、1x10、2x10、6x1、6x2
 
-    识别区域大小（水平方向像素 x 垂直方向像素）：2x2、4x4、8x8、16x16、32x32
+    Size(W x H): 2x2、4x4、8x8、16x16、32x32
 
-    **注意**：百分比坐标系下想表示一个正方形，其宽w和高h是不相等的，而是符合3：4的关系。比如，如果正方形的宽w为12%,那么其对应的高度h应该为12/3×4=16%
+    **NOTE**：To represent a square in the percentage coordinate system, the width and height are not equal, but conform to the 3:4 relationship. 
+    For example, if the width of a square is 12%, then its height h should be 12/3×4=16%.
+    In the absolute coordinate system, the preset recognition area size are : 1x1, 2x3, 3x4, 6x8, 9x12
 
-    百分比坐标系下，预设的识别区域大小（水平方向百分比 x 垂直方向百分比）：1x1、2x3、3x4、6x8、9x12
-
-* 返回结果
+* Results
 
     .. image:: images/sentry2_vision_color_running.png
 
-    识别到颜色后，UI界面上的识别区域将会变为其对应颜色的方框，如果是未知颜色，则会显示一个四角框
-
-    当通过主控读取寄存器时，将会返回以下的数据：
+    There will be a rectangular box on the screen that identifies the color, and a 4-corner box identifies the unknown color
 
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   R，红色值，范围 0～255
-    2                   G，绿色值，范围 0～255
-    3                   B，蓝色值，范围 0～255
-    4                   无
-    5                   颜色分类标签
+    1                   R, red channel value, range 0～255
+    2                   G, green channel value, range 0～255
+    3                   B, blue channel value, range 0～255
+    4                   None
+    5                   Color label
     ================    ================================
 
-* 使用技巧
+* Tips
 
-    1. 由于是对像素进行统计处理，当识别区域较多且较大时，处理速度会相应的变慢，反之则会比较快速。
-    2. 当识别区域窗口较小时（比如2x2），可以识别较小的色块，处理速度快，但统计样本太少，容易被干扰，可信度较低，适合于背景单一可控的环境。
-    3. 当识别区域窗口较大时（比如32x32），统计样本多，即便出现若干的杂色也会被滤除，具有较高的可信度，但处理速度会变慢，当识别区域处于2种颜色的边界时，颜色可能会经常跳变。
-    4. 当画面存在偏色时，需要锁定白平衡功能
+    1. The process speed will be slow down if the size of region is too large
+    2. A smaller region (such as 2x2), faster but be easily disturbed 
+    3. A larger region (such as 32x32), slower but higher credibility 
+    4. Suggest to lock the white balance if color is abnormal
 
 .. _chapter_vision_blob_index:
 
-ID:2 色块检测-Blob
+ID:2 Blob
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_blob_selecting.png
 
-    用户指定检测一个或多个颜色，判断图像中是否有该颜色的色块，返回其坐标和大小，支持多颜色多色块检测，颜色分类标签与颜色识别中的定义相同。
+    Find a certain color block from an image and return its coordinate and size. It support mulit-color and multi-result detection. 
+    The color label has the same definition of Color vision 
 
-* 配置参数
+* Parameters
 
-    用户需要指定待检测的颜色标签，最多可同时开启全部6种颜色检测，但速度会有所下降。用户还可以通过设置色块的最小宽度w和高度h来过滤那些小于该值的色块，以减少误报。
-
-    当通过主控设置寄存器时，有以下参数需要设置：
+    User need to decide which color to be detected firstly. 
+    The width and height of the minimum color piece can be configured to reduce the false results:
 
     ================    ================================
-    参数                 含义
+    Param               Brief
     ================    ================================
-    1                   无
-    2                   无
-    3                   有效色块最小宽度w
-    4                   有效色块最小高度h
-    5                   待检测的颜色分类标签（注意：该值是与设置参数一致的）
+    1                   None
+    2                   None
+    3                   Minimum width
+    4                   Minimum height
+    5                   The label of Color to be detected
     ================    ================================
 
     .. image:: images/sentry2_vision_blob_setting.png
 
-    在UI界面中，有几种预置的参数可以使用：
-        算法性能：
-            根据不同的应用需求来选择合适能算法性能，有3个选项可以设置，分别为“灵敏”、“均衡”、“准确”
+    We provide several preset parameters in the UI setting page:
+        Algorithm Performance Level:
+            To select the performance of the vision according to different application requirements:
+            "Sensitive", "Balance", and "Accurate".
             
-            在灵敏模式下识别速度快，帧率高。准确模式下可以检测远处的色块，但速度会降低。默认为均衡性能
+        Maximum Number of Blocks:
+            Support 1~5 blocks for each color
 
-        同时检测的最大数量：
-            单个颜色的最大检测数量支持1～5个的输出
-            
-            当设置为1时，只返回一个最优结果，如果图像中有多个色块，则返回最大的那个，如果大小相近，则优先返回左上角的那个
-            
-            当设置大于1时，返回色块的数量不会超过这个值。
+        Minimum Size of Block:
+            Absolute Coordinate System: 2x2, 4x4, 8x8, 16x16, 32x32, 64x64, 128x128 pixel
 
-        最小色块的区域大小：
-            如果背景中存在相同颜色的小色块，可以通过合理的设置最小值实现过滤功能
-            
-            绝对值坐标系下的预设值为：2x2、4x4、8x8、16x16、32x32、64x64、128x128像素
+            Percentage Coordinate System:1x1, 2x3, 3x4, 6x8, 9x12, 21x28, 42x56 %
 
-            百分比坐标系下的预设值为：1x1、2x3、3x4、6x8、9x12、21x28、42x56 %
+        Color to be Detected：
+            An open eye icon is displayed if the color label is actived
 
-        待检测的颜色：
-            以按键形式提供用户选择，开启某个颜色后会显示一个小眼睛图标，未开启的颜色则会显示一个带斜杠的眼睛图标，可以同时开启一个或多种颜色
-
-* 返回结果
+* Results
 
     .. image:: images/sentry2_vision_blob_running.png
 
-    识别到指定色块后会在UI界面上进行标识，显示其位置、大小、分类标签、名称等信息
-
-    当通过主控读取寄存器时，将会返回以下的数据：
+    Get the results :
     
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   色块中心x坐标
-    2                   色块中心y坐标
-    3                   色块宽度w
-    4                   色块高度h
-    5                   颜色分类标签
+    1                   X-coordinate of the block center
+    2                   Y-coordinate of the block center
+    3                   Width of the block
+    4                   Height of the block
+    5                   Color label
     ================    ================================
 
-* 使用技巧
+* Tips
 
     1. 当确定需要跟踪一个物体时，比如检测白色的道路或是跟踪小球，可以将色块数量设置为1，可以提高速度，减少误报
     2. 采用较小的识别区域并使用准确性能模式，可以看到更远处的物体
@@ -250,58 +238,57 @@ ID:2 色块检测-Blob
 
 .. _chapter_vision_apriltag_index:
 
-ID:3 标签识别-Apriltag
+ID:3 Apriltag
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_apriltag_selecting.png
 
-    判断图像中是否有Apriltag标签图案，目前支持16H5，25H9，36H11的编码形式，算法运行时需要先指定用哪一种解码方式，不同的编码形式不可以同时检测，但同一种编码可同时检测25个标签。
+    Find apriltags from an image, support 16H5，25H9，36H11 encoding family and up to 25 results. 
+    You need to decide which encoding family to use before this vision enabled, and only one family can be process
 
-    **注意**：该算法不可以与其他带*号的算法同时运行
+    **NOTE**: This vision cannot run at the same time as other vision marked with asterisks
 
-    **分类标签**
+    **Label**
 
     .. image:: images/sentry2_vision_apriltag_family.png
 
-    apriltag标签为一组已经定义好的黑白方块图案，不同的编码形式使用的方块数量是不同的。每个图案都有一个预定义的分类标签值，识别后会返回该值。
+    Apriltag is a set of defined black and white squares. 
+    Different codes use different numbers of squares. 
+    Each pattern has a predefined label.
 
-    `Apriltag图案下载 <https://github.com/AprilRobotics/apriltag-imgs/tree/master>`
+    `Apriltag image download <https://github.com/AprilRobotics/apriltag-imgs/tree/master>`
 
-* 配置参数
+* Parameters
 
     .. image:: images/sentry2_vision_apriltag_setting.png
 
-    UI界面中可以设置算法性能和编码形式
+    We provide several preset parameters in the UI setting page:
+        Algorithm Performance Level:
+            To select the performance of the vision according to different application requirements:
+            "Sensitive", "Balance", and "Accurate".
 
-        算法性能：
-            根据不同的应用需求来选择合适能算法性能，有3个选项可以设置，分别为“灵敏”、“均衡”、“准确”
-            
-            在灵敏模式下识别速度快，帧率高。准确模式下可以检测远处的标签，但速度会降低。默认为均衡性能
-
-        编码形式：
-            当点击按钮时，会循环切换“16H5”，“25H9”，“36H11”三种编码模式，切换后需要重启算法，下次启动时生效
+        Encoding Family:
+            Support “16H5”，“25H9”，“36H11”
 
 
-* 返回结果
+* Results
     .. image:: images/sentry2_vision_apriltag_running.png
 
-    识别到标签后会返回其坐标、大小和标签编号
-
-    当通过主控读取寄存器时，将会返回以下的数据：
+    Get the results :
 
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   标签中心x坐标
-    2                   标签中心y坐标
-    3                   标签宽度w
-    4                   标签高度h
-    5                   标签编号
+    1                   X-coordinate of the tag center
+    2                   Y-coordinate of the tag center
+    3                   Width of the tag
+    4                   Height of the tag
+    5                   Label
     ================    ================================
 
-* 使用技巧
+* Tips
 
     1. 所识别到的标签宽度和高度具有较稳定的输出，可以利用这一点进行距离判断，标签旋转后不会改变其大小，但倾斜时可能会有影响
     2. 当需要识别多个标签时，可以关闭坐标线的显示，看起来比较简洁
@@ -309,54 +296,49 @@ ID:3 标签识别-Apriltag
 
 .. _chapter_vision_line_index:
 
-ID:4 线条检测-Line
+ID:4 Line
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_line_selecting.png
-
-    检测图像中是否有线条，如果有则会返回线条的两个端点和倾斜角度，最多可同时检测5个线段，如果为曲线，则会返回近似的直线段
     
-* 配置参数
+    Find one or up to 5 lines from an image and return its 2 endpoints coordinate and degrees. If it is a curve, an approximate line segment is returned
+ 
+* Parameters
 
     .. image:: images/sentry2_vision_line_setting.png
 
-    UI界面中可以设置算法性能和同时检测的线段数量
+    Several parameters can be set in UI setting page:
+        Algorithm Performance Level:
+            To select the performance of the vision according to different application requirements:
+            "Sensitive", "Balance", and "Accurate".
 
-        算法性能：
-            根据不同的应用需求来选择合适能算法性能，有3个选项可以设置，分别为“灵敏”、“均衡”、“准确”
-            
-            灵敏模式下会对小线段更为敏感，准确模式下会忽略较小的线段，默认为均衡模式
-        
-        线段数量：
-            可以设置1～5条线段
+        Maximum Lines Number:
+            Range from 1 to 5
 
-* 返回结果
+* Results
 
     .. image:: images/sentry2_vision_line_running_01.png
 
-    检测到线条后会返回其两个端点和倾斜角度
-
-    **注意**：水平向右为0度，逆时针增大，垂直向上为90度，水平向左为180度，一般不会向下检测输出角度
+    **NOTE:** The horizontal to the right is 0 degrees, the value is increased by counterclockwise. 
+    Upward is 90 degrees, and the horizontal to the left is 180 degrees.
 
     .. image:: images/sentry2_vision_line_running_02.png
 
-    最多可同时可检测5个线段，为便于UI界面上进行区分，按结果顺序依次用“红、黄、绿、蓝、紫”五种颜色进行标记
-
-    当通过主控读取寄存器时，将会返回以下的数据：
+    We use 5 different colors - red, yellow, green, blue, and purple - to distinguish the multi-lines
 
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   线段终点x坐标（高处）
-    2                   线段终点y坐标（高处）
-    3                   线段起点x坐标（低处）
-    4                   线段起点y坐标（低处）
-    5                   线段的倾斜角度
+    1                   X-coordinate of the end point of the line (upper)
+    2                   Y-coordinate of the end point of the line (upper)
+    3                   X-coordinate of the start point of the line (lower)
+    4                   Y-coordinate of the start point of the line (lower)
+    5                   Degree of the line
     ================    ================================
 
-* 使用技巧
+* Tips
 
     1. 背景与线条应清晰分明，比如白底黑线，如果背景杂乱，则可能会检测出背景中的线条
     2. 线条粗细应适中，不可过细，也不可太宽
@@ -364,82 +346,71 @@ ID:4 线条检测-Line
 
 .. _chapter_vision_learning_index:
 
-ID:5 深度学习-Learning
+ID:5 Learning
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_learn_selecting.png
 
-    可以对任意物体进行离线学习并识别，目前支持存储25个物体，用户可以对已训练的模型进行重命名，删除操作
+    Objects can be trained and recognized by this vision, up to 25 model data can be saved
 
-* 配置参数
+* Parameters
 
-    训练新的物体：
-        在运行界面可以训练新的物体，操作方法如下：
+    Training New Object:
+        New object can be trained in the running page：
 
         .. image:: images/sentry2_vision_learn_training.png
 
-        新训练物体会自动分配标签值，分配原则是：选择当前可用ID号中最小的那个序号
-
-    删除所有模型：
-        在运行界面中，垂直长按摇杆2秒以上，可以删除所有模型数据
+        A label will be automatically assigned to the new object. 
+        The principle is: select the smallest number from the available ID
+        
+    Delete All Objects:
+        Vertically long press the joystick more than 2 seconds in the running page.
 
         .. image:: images/sentry2_vision_learn_delete_all.png
-        
-
-    当通过主控设置寄存器时，可以将参数5写入0来删除对应的模型文件：
 
     ================    ================================
-    参数                 含义
+    Param               Brief
     ================    ================================
-    1                   无
-    2                   无
-    3                   无
-    4                   无
-    5                   如果当前Param-ID已经存在，写入0后可以删除该ID的模型数据，写入100可以重新训练该ID的模型数据
+    1                   None
+    2                   None
+    3                   None
+    4                   None
+    5                   Write 0 to delete this object, or write 100 to trained
     ================    ================================
 
     .. image:: images/sentry2_vision_learn_setting.png
 
-    在UI界面中，可以对已训练的模型进行重命名或删除操作
+    You can rename or delete the trained model in the UI setting page
 
-
-    对模型重命名：
-        在UI界面中可以对已训练的物体进行重命名，操作方法如下：
+    Rename:
 
         .. image:: images/sentry2_vision_learn_rename.png
 
-        *注意*：只支持英文的命名方式，不支持其他语言
+        *NOTE*：No more than 32 characters 
 
-        *注意*：名称最大支持32个字符，建议不要太长
-
-        *注意*：设置名称只用于帮助用户记忆和理解，但主控设备并不能读取该名称
-
-    删除单个模型：
-        在UI界面中可以删除单个模型数据，操作方法如下：
+    Delete:
 
         .. image:: images/sentry2_vision_learn_delete.png
 
-* 返回结果
+* Results
 
     .. image:: images/sentry2_vision_learn_running.png
 
-    该算法只支持判断被训练物体是否存在，而不判断其坐标方位等信息，所以识别框为一个固定输出值
-
-    当通过主控读取寄存器时，将会返回以下的数据：
+    The vision can only judge the existence of the trained object, but not its coordinates and size, so the recognition box is a fixed output value
 
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   固定值，160
-    2                   固定值，120
-    3                   固定值，224
-    4                   固定值，224
-    5                   训练物体的ID号
+    1                   Fixed, 160
+    2                   Fixed, 120
+    3                   Fixed, 224
+    4                   Fixed, 224
+    5                   Label
     ================    ================================
 
-* 使用技巧
+* Tips
 
     1. 该算法支持对物体旋转后的识别，但是需要位于“0度，90度，180度，270度”四个方向上识别，左右有15度的容差。如果需要支持任意角度的物体识别，可以拍摄多个角度的图片，比如拍摄了0度，30度，60度时物体的照片，分别对应标签ID1,ID2,ID3，则可以把这3个ID当作同一个物体来处理
     
@@ -448,74 +419,73 @@ ID:5 深度学习-Learning
 
 .. _chapter_vision_card_index:
 
-ID:6 卡片识别-Card
+ID:6 Card
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_card_selecting.png
 
-    识别图像中是否有指定的卡片图案，返回其卡片坐标、大小、分类标签等信息。包括交通标志类，图形符号类，数字类，其分类标签见下表
+    recognize a specified card in the image and return its coordinates, size, label and other information. 
+    It includes traffic cards, shape cards and numbers cards. The labels are shown in the following table
 
-    **交通标志**
+    **Traffic**
 
-    ================    ================    ================    ================    ================    ================
-    分类标签              英文标识              中文含义             分类标签             英文标识              中文含义
-    ================    ================    ================    ================    ================    ================
-    1                    Forward             前进                2                   Left                左转
-    3                    Right               右转                4                   Turn Around         掉头
-    5                    Park                停车                6                   Green               绿灯
-    7                    Red                 红灯                8                   Speed 40            限速40
-    9                    Speed 60            限速60              10                  Speed 80            限速80
-    ================    ================    ================    ================    ================    ================
+    ================    ================    ================    ================    
+    Label               Name                Label               Name              
+    ================    ================    ================    ================    
+    1                    Forward             2                   Left                
+    3                    Right               4                   Turn Around         
+    5                    Park                6                   Green               
+    7                    Red                 8                   Speed 40            
+    9                    Speed 60            10                  Speed 80            
+    ================    ================    ================    ================    
 
-    **图形符号**
+    **Shape**
 
-    ================    ================    ================    ================    ================    ================
-    分类标签              英文标识              中文含义             分类标签             英文标识              中文含义
-    ================    ================    ================    ================    ================    ================
-    11                   Check               对号                 12                  Cross              叉号
-    13                   Circle              圆形                 14                  Square             方形
-    15                   Triangle            三角形               16                  Plus               加号
-    17                   Minus               减号                 18                  Divide             除号
-    19                   Equal               等于号
-    ================    ================    ================    ================    ================    ================
+    ================    ================    ================    ================    
+    Label               Name                Label               Name            
+    ================    ================    ================    ================   
+    11                   Check               12                  Cross              
+    13                   Circle              14                  Square            
+    15                   Triangle            16                  Plus               
+    17                   Minus               18                  Divide             
+    19                   Equal               
+    ================    ================    ================    ================    
 
-    **数字**
+    **Number**
 
-    ================    ================    ================    ================    ================    ================
-    分类标签              英文标识              中文含义             分类标签             英文标识              中文含义
-    ================    ================    ================    ================    ================    ================
-    20                   Num 0               数字0               21                   Num 1              数字1
-    22                   Num 2               数字2               23                   Num 3              数字3
-    24                   Num 4               数字4               25                   Num 5              数字5
-    26                   Num 6               数字6               27                   Num 7              数字7
-    28                   Num 8               数字8               29                   Num 9              数字9
-    ================    ================    ================    ================    ================    ================
+    ================    ================    ================    ================    
+    Label               Name                Label               Name             
+    ================    ================    ================    ================    
+    20                   Num 0               21                   Num 1              
+    22                   Num 2               23                   Num 3              
+    24                   Num 4               25                   Num 5              
+    26                   Num 6               27                   Num 7              
+    28                   Num 8               29                   Num 9              
+    ================    ================    ================    ================    
 
-* 配置参数
+* Parameters
 
-    无
+    None
 
-* 返回结果
+* Results
 
     .. image:: images/sentry2_vision_card_running.png
 
-    该算法支持多张卡片同时识别，卡片在30度以内的旋转仍然可以识别，角度旋转过大则无法识别
-
-    当通过主控读取寄存器时，将会返回以下的数据：
+    This vision can recognize multiple cards at same time, and the rotation of cards within 30 degrees can still be recognized but don't rotate the angle too much.
 
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   卡片中心x坐标
-    2                   卡片中心y坐标
-    3                   卡片宽度w
-    4                   卡片高度h
-    5                   卡片分类标签
+    1                   X-coordinate of the card center
+    2                   Y-coordinate of the card center
+    3                   Width of the card
+    4                   Height of the card
+    5                   Label of the card
     ================    ================================
 
-* 使用技巧
+* Tips
 
     1. 该算法可以检测到远距离的卡片，但此时并不是用户所期望的检测位置，此时可以通过判断“卡片宽度”来排除那些远距离的卡片，比如只有当卡片宽度>50%时，才会触发接下来的动作行为
     
@@ -524,124 +494,113 @@ ID:6 卡片识别-Card
 
 .. _chapter_vision_face_index:
 
-ID:7 人脸识别-Face
+ID:7 Face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_face_selecting.png
 
-    检测图像中是否含有人脸，可以通过按键对人脸进行学习训练，当再次检测到该人脸时，返回一个分类标签用于区分是哪个人脸。
+    Faces can be trained and recognized by this vision, up to 25 model data can be saved, its also support mask detection
 
-* 配置参数
+* Parameters
 
-    训练新的人脸：
-        在运行界面可以训练新的人脸，操作方法如下：
+    Training New Face:
+        New object can be trained in the running page：
 
         .. image:: images/sentry2_vision_face_training.png
 
-        新训练的人脸会自动分配标签值，分配原则是：选择当前可用ID号中最小的那个序号
-
-    删除所有人脸：
-        在运行界面中，垂直长按摇杆2秒以上，可以删除所有模型数据        
-
-    当通过主控设置寄存器时，可以将参数5写入0来删除对应的模型文件：
+    A label will be automatically assigned to the new face. 
+        The principle is: select the smallest number from the available ID
+        
+    Delete All Faces:
+        Vertically long press the joystick more than 2 seconds in the running page.
 
     ================    ================================
-    参数                 含义
+    Param               Brief
     ================    ================================
-    1                   无
-    2                   无
-    3                   无
-    4                   无
-    5                   如果当前Param-ID已经存在，写入0后可以删除该ID的模型数据，写入100可以重新训练该ID的模型数据
+    1                   None
+    2                   None
+    3                   None
+    4                   None
+    5                   Write 0 to delete this object, or write 100 to trained
     ================    ================================
 
     .. image:: images/sentry2_vision_face_setting.png
 
-    在UI界面中，可以对已训练的模型进行重命名或删除操作，操作方法可参考：算法ID:5 :ref:`深度学习<chapter_vision_learning_index>` 
+    You can rename or delete the trained model in the UI setting page, refer to :ref:`Learning<chapter_vision_learning_index>` 
 
-    *注意*：设置名称只用于帮助用户记忆和理解，但主控设备并不能读取该名称
-
-* 返回结果
+* Results
 
     .. image:: images/sentry2_vision_face_running.png
 
-    该算法支持人脸检测（未训练的人脸）和人脸识别（已训练的人脸）同时运行，检测到未训练的人脸时会显示标签为0，名称为“新人脸”，当检测到已训练的人脸时，会显示相应的标签和存储的名称
-
-
-    特殊的，如果检测到戴口罩的新人脸，会显示“新人脸（口罩）”，标签固定为200
+    This vision support face detection (new face) and face recognition (trained face) running at the same time. 
+    New face will be assigned label 0. 
+    Specially, if a new face wearing a mask is detected, "New face (mask)" will be displayed, and the label is fixed at 200
 
     .. image:: images/sentry2_vision_face_mask.png
 
-    当通过主控读取寄存器时，将会返回以下的数据：
-
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   人脸中心x坐标
-    2                   人脸中心y坐标
-    3                   人脸宽度w
-    4                   人脸高度h
-    5                   人脸分类标签，特殊的：0-新人脸，200-戴口罩的新人脸
+    1                   X-coordinate of the face center
+    2                   Y-coordinate of the face center
+    3                   Width of the face
+    4                   Height of the face
+    5                   Label, 0:new face, 200:new face with mask
     ================    ================================
 
 .. _chapter_vision_20class_index:
 
-ID:8 20类物体识别-20Class
+ID:8 20Class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_20class_selecting.png
 
-    识别常见的20类物体，返回他们的坐标信息和分类标签，详见下表。
+    Identify 20 common types of objects and return their coordinate, size and labels, as shown in the table below.
 
-    **图形符号类**
+    **Label**
 
-    ================    ================    ================    ================    ================    ================
-    分类标签              英文标识              中文含义             分类标签             英文标识              中文含义
-    ================    ================    ================    ================    ================    ================
-    1                    Airplane            飞机                2                   Bicycle             自行车
-    3                    Bird                鸟                  4                   Boat                船
-    5                    Bottle              瓶子                6                   Bus                 公交车
-    7                    Car                 小汽车              8                    Cat                猫
-    9                    Chair               椅子                10                  Cow                 牛
-    11                   DiningTable         餐桌                12                  Dog                 狗
-    13                   Horse               马                  14                  Motorbike           摩托车
-    15                   Person              人                  16                  PottedPlant         盆栽植物
-    17                   Sheep               羊                  18                  Sofa                沙发
-    19                   Train               火车                20                  Tvmonitor           电视  
-    ================    ================    ================    ================    ================    ================
+    ================    ================    ================    ================    
+    Label               Name                Label               Name  
+    ================    ================    ================    ================    
+    1                    Airplane            2                   Bicycle
+    3                    Bird                4                   Boat 
+    5                    Bottle              6                   Bus 
+    7                    Car                 8                   Cat 
+    9                    Chair               10                  Cow 
+    11                   DiningTable         12                  Dog 
+    13                   Horse               14                  Motorbike 
+    15                   Person              16                  PottedPlant 
+    17                   Sheep               18                  Sofa 
+    19                   Train               20                  Tvmonitor 
+    ================    ================    ================    ================ 
 
-* 配置参数
+* Parameters
 
     .. image:: images/sentry2_vision_20class_setting.png
+    
+    Algorithm Performance Level:
+            To select the performance of the vision according to different application requirements:
+            "Sensitive", "Balance", and "Accurate".
 
-    UI界面中可以设置算法性能
-
-        算法性能：
-            根据不同的应用需求来选择合适能算法性能，有3个选项可以设置，分别为“灵敏”、“均衡”、“准确”
-            
-            灵敏模式下会更容易识别到物体，但可能误报较高，准确模式下会相对减少误报，默认为均衡模式
-
-* 返回结果
+* Results
     
     .. image:: images/sentry2_vision_20class_running.png
 
-    当通过主控读取寄存器时，将会返回以下的数据：
-
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   物体中心x坐标
-    2                   物体中心y坐标
-    3                   物体宽度w
-    4                   物体高度h
-    5                   物体分类标签
+    1                   X-coordinate of the object center
+    2                   Y-coordinate of the object center
+    3                   Width of the object
+    4                   Height of the object
+    5                   Label
     ================    ================================
 
-* 使用技巧
+* Tips
 
     1. 图像清晰度会较为明显的影响到识别效果，如果图案太小，摄像头无法清晰对焦到图案上，屏幕中图像看起来比较模糊，那么识别效果会变差，可以使用较大的图片
 
@@ -650,19 +609,19 @@ ID:8 20类物体识别-20Class
 
 .. _chapter_vision_qrcode_index:
 
-ID:9 二维码识别-QrCode
+ID:9 QrCode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_qrcode_selecting.png
 
-    可以识别一个标准二维码，该二维码可包含最多25个ASCII码字符数据
+    A standard QR code (less than 25 ASCII characters) can be recognized
 
-    **ASCII码对照表**
+    **ASCII Table**
 
     ================    ================    ================    ================    ================    ================
-    分类标签              ASCII               分类标签             ASCII               分类标签              ASCII
+    Label               ASCII               Label               ASCII               Label               ASCII
     ================    ================    ================    ================    ================    ================
     32                   空格                 33                  !                   34                  "
     35                   #                   36                  $                   37                  %
@@ -700,69 +659,63 @@ ID:9 二维码识别-QrCode
 
 
 
-* 配置参数
+* Parameters
 
-    无
+    None
     
-* 返回结果
+* Results
 
     .. image:: images/sentry2_vision_qrcode_running.png
 
     该算法返回结果包含两种信息，第一组结果为属性信息，后续结果为字符数据，每组结果包含5个字符
 
-    **属性信息**
+    Different than other visions, this vision returns two kinds of information, attribute packet and character data
+
+    **Attribute Packet**
 
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   二维码中心x坐标
-    2                   二维码中心y坐标
-    3                   二维码宽度w
-    4                   二维码高度h
-    5                   二维码字符数量
+    1                   X-coordinate of the QR Code center
+    2                   Y-coordinate of the QR Code center
+    3                   Width of the QR Code
+    4                   Height of the QR Code
+    5                   Number of characters
     ================    ================================
 
-    **字符数据**
+    **Character Data**
 
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   字符1编码
-    2                   字符2编码
-    3                   字符3编码
-    4                   字符4编码
-    5                   字符5编码
+    1                   character data
+    2                   character data
+    3                   character data
+    4                   character data
+    5                   character data
     ================    ================================
 
 .. _chapter_vision_custom_index:
 
-ID:10 自定义-Custom
+ID:10 Custom
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_custom_selecting.png
 
-    该算法将运行ESP8285-WiFi芯片内的程序，运行自定义的算法：
-    
-    1、云端算法支持：Sentry2将摄像头图片通过WiFi送给第三方云端服务器进行识别，将返回的识别结果写入寄存器中；
-    
-    2、算法功能扩展：比如可以将小车巡线功能的完整逻辑代码转移到板载的ESP8285中去实现；
-    
-    3、算法性能提升：可以在ESP8285中对算法结果进行二次处理，比如滤波、消除抖动、阈值判断、数据统计、PID控制等。
+    If this mode is enabled, the wifi chip will run, details:
+    :download:`Sentry2 WiFi Firmware Developing User Guide_V1.1.pdf <../Download/docs/Sentry2 WiFi Firmware Developing User Guide_V1.1.pdf>`
 
-    ESP8285内的程序可以通过Arduino-IDE进行编程开发，详情见
-    :download:`WiFi固件开发环境搭建与烧录指导手册 <../Download/docs/Sentry2 WiFi固件开发环境搭建与烧录指导手册_V1.0.pdf>`
+* Parameters
 
-* 配置参数
+    Custom 
 
-    自定义
+* Results
 
-* 返回结果
+    Custom
 
-    自定义
-
-* 使用技巧
+* Tips
 
     1. 图像清晰度会较为明显的影响到识别效果，如果图案太小，摄像头无法清晰对焦到图案上，屏幕中图像看起来比较模糊，那么识别效果会变差，可以使用较大的图片
 
@@ -771,35 +724,31 @@ ID:10 自定义-Custom
 
 .. _chapter_vision_motion_index:
 
-ID:11 运动物体检测-Motion
+ID:11 Motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* 算法简介
+* Brief
 
     .. image:: images/sentry2_vision_motion_selecting.png
 
-    在摄像头静止状态下，通过对比相邻帧的像素差异，来判断图像中是否有发生变化的区域，如果有则认为该区域有运动物体，返回这个区域的坐标信息。
-    该算法目前只能返回一个检测结果。
+    Compared the pixel difference of adjacent frames to determine whether there is a motion region in the image, return its coordinate and size. 
 
-* 配置参数
+* Parameters
 
-    无
+    None
 
-* 返回结果
+* Results
 
     .. image:: images/sentry2_vision_motion_running.png
 
-    当通过主控读取寄存器时，将会返回以下的数据：
-
     ================    ================================
-    结果                 含义
+    Result              Brief
     ================    ================================
-    1                   运动区域中心x坐标
-    2                   运动区域中心y坐标
-    3                   运动区域宽度w
-    4                   运动区域高度h
-    5                   无
+    1                   X-coordinate of the region center
+    2                   Y-coordinate of the region center
+    3                   Width of the region
+    4                   Height of the region
+    5                   None
     ================    ================================
-
 
 //end
