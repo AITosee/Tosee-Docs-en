@@ -1,51 +1,48 @@
 .. _chapter_upgrade_index:
 
-固件升级
+Upgrade
 ===================
 
-固件下载地址
+Firmware Download
 ----------------
 
-在资源下载页面中 :ref:`下载固件<chapter_download_firmware_index>`
+:ref:`Firmware Download Page<chapter_download_firmware_index>`
 
 
-固件升级教程
+Instruction
 ----------------
 
-1. 安装USB驱动
+1. Install Software and USB driver
+    Download and install software
+    https://dl.sipeed.com/MAIX/tools/kflash_gui/kflash_gui_v1.6.5
 
-    安装 :ref:`USB驱动<chapter_download_third_party_index>`，如果电脑可以识别设备，则可以不用安装
+    Download and install usb driver
+    :ref:`USB Driver<chapter_download_third_party_index>`
 
-2. 连接设备
+2. Connect Vision Sensor and Computer via a Type-C USB cable
 
-    将视觉传感器通过 Type-C USB 数据线连接至电脑
+3. Run ``kflash_gui.exe`` and follow the steps as shown bellow:
 
-3. 配置信息
+    .. image:: images/sentry_upgrade_kflash_gui_en.png
 
-    打开 ``kflash_gui/`` 文件夹里的 ``kflash_gui.exe`` 应用程序，按照下图所示步骤进行操作。
+4. Upgrade
 
-    .. image:: images/sentry_upgrade_kflash_gui.png
+    You’ll see the picture as shown in the below after clicked “Download” button, and then,  
+    vertically click the joystick for about 2 seconds to start download.
 
-4. 下载固件
-
-    点击“下载”后将会出现下图所示界面，此时 **垂直压按视觉传感器的摇杆键约 2 秒** 来启动下载并等待下载完成.
-
-    .. image:: images/sentry_upgrade_press_key.png
+    .. image:: images/sentry_upgrade_press_key_en.png
         :scale: 50 %
 
-    .. image:: images/sentry_upgrade_kflash_download.png
+    .. image:: images/sentry_upgrade_kflash_download_en.jpg
 
-5. 等待下载完成
+5. Wait for finish
 
-    .. image:: images/sentry_upgrade_download_success.png
+    .. image:: images/sentry_upgrade_download_success_en.jpg
 
-6. 重启传感器
-
-    固件更新完成后传感器会自动重启,如果没有,可以短按 ``复位键`` 或者重新上电来重启设备。
+6. Restart the Sensor
 
 
-
-固件更新说明
+Released
 ----------------
 
 Version:V2.2.1 - 2022.07.20

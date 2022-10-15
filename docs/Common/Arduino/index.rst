@@ -1,6 +1,6 @@
 .. _chapter_arduino_index:
 
-Sentry-Arduino 开发文档
+Sentry-Arduino
 =======================
 
 Sentry-Arduino 库是一个专门为 Arduino 系列开发板定制打造的驱动库，适用于 Sentry 全系列产品，

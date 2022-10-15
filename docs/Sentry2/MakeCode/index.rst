@@ -1,6 +1,6 @@
 .. _chapter_makecode_index:
 
-Sentry-MakeCode 开发文档
+Sentry-MakeCode
 ========================
 
 `pxt-sentry <https://github.com/AITosee/pxt-sentry>`_ 为适配 ``microbit&MakeCode`` 开发的驱动库，
@@ -12,6 +12,12 @@ Sentry-MakeCode 开发文档
 1. 打开 `MakeCode 在线编程界面 <https://makecode.microbit.org/>`_。
 2. 新建工程。
 3. 依次点击 ``高级→扩展``，在搜索栏输入 ``https://github.com/AITosee/pxt-sentry``。
+
+    .. tip::
+
+        由于 micro:bit 程序空间有限，建议采用 I2C 通讯模式，导入下方专用库（仅支持 I2C 通讯，体积小）：
+        ``https://github.com/AITosee/pxt-sentry2-i2c``
+
 4. 点击搜索出来的库添加，即可完成库的加载。
 
 例程

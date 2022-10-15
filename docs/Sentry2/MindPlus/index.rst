@@ -1,6 +1,6 @@
 .. _chapter_mindplus_index:
 
-Sentry-Mind+ 开发文档
+Sentry-Mind+
 =====================
 
 `ext-sentry <https://github.com/AITosee/ext-sentry>`_ 为适配 `Mind+ <http://mindplus.cc/>`_ 开发的驱动库，

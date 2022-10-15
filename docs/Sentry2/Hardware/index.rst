@@ -6,20 +6,16 @@ Hardware
 Brief
 ----------------
 
-Sentry2 is a Vision Sensor which is developed and designed by K210 - an advanced 64-bits RISC-V neural network processor. 
+Sentry2 is a vision sensor which is designed by K210 - an advanced 64-bits RISC-V neural network processor. 
 This device integrates a variety of advanced vision algorithms, which can meet the basic vision processing needs.
-The on-board ESP8285-WiFi chip can be programmed and developed directly through Arduino to realize online-recognition, image transmission, AIoT and other applications. 
-ESP8285 can be used as a controller for K210 which is help for AI programming without external device.
+The on-board ESP8285-WiFi chip can be programmed in Arduino IDE directly to realize online-recognition, image transmission, AIoT and other applications. 
+ESP8285 can be used as a controller for K210 which is help for AI programming without external controller.
 
-We offer 2 versions: Enterprise Edition (marked E) and Consumer Edition (marked C).
-
-The hardware and algorithms of these two editions are different. 
-Unless otherwise specified in the following documents, refer to the Enterprise version. 
-You can check the edition in the lower right corner of the screen after startup.
+We offer 2 edition: Enterprise Edition (marked E) and Consumer Edition (marked C).
 
 Applications: Robots, Smart Cars, Creative Design, STEAM Education, Maker, Toys, AIoT
 
-.. image:: images/sentry2_top_bot_view.png
+.. image:: images/sentry2_top_bot_view_en.png
 
 
 **LED**: Different colors of light can reflect different recognition results.
@@ -41,7 +37,7 @@ Applications: Robots, Smart Cars, Creative Design, STEAM Education, Maker, Toys,
 
 **Reset button**: Restart the hardware
 
-**Communication Port**: A 4 pins communication port for Controller, support UART and I2C mode
+**Output Port**: A 4-pins output port for communication, support UART and I2C mode
 
 
 
@@ -101,7 +97,7 @@ Platform                                             Language                   
 :ref:`Mind+<chapter_mindplus_index>`                Graphical，C/C++，MicroPython         Arduino、Micro:bit                  https://github.com/AITosee/ext-sentry/releases 
 :ref:`Mixly<chapter_mixly_index>`                   Graphical                            Arduino                             https://github.com/AITosee/Sentry-Mixly/releases 
 :ref:`BXY<chapter_micropython_index>`               MicroPython                          Micro:bit                           https://github.com/AITosee/Sentry-microPython/releases 
-ARM PC                                              C/C++                                Raspberry pie，Linux                 :download:`Sentry-Arduino-1.2.4_for_linux.zip <../Download/libs/Sentry-Arduino-1.2.4_for_linux.zip>` 
+ARM PC                                              C/C++                                Raspberry Pie，Linux                 :download:`Sentry-Arduino-1.2.4_for_linux.zip <../Download/libs/Sentry-Arduino-1.2.4_for_linux.zip>` 
 ================================================    ================================    ================================    ======================================================================================================== 
 
 How to Use
@@ -121,7 +117,7 @@ Connect the Controller
 Pins Definition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/sentry2_output_port_info.png
+.. image:: images/sentry2_output_port_info_en.png
 
 ================    ================    ================    ================
 Pins                UART Mode           I2C Mode            Note
@@ -138,7 +134,7 @@ Take Arduino UNO as an example
 
 **UART Mode**
 
-.. image:: images/sentry2_connection_arduino_uart.png
+.. image:: images/sentry2_connection_arduino_uart_en.png
 
 **NOTE: In UART Mode, make sure your connection is correct: Sentry2 RX - Arduino TX, Sentry2 TX - Arduino RX**
 
@@ -150,14 +146,14 @@ and I2C or soft serial port mode is recommended**
 
 **I2C Mode**
 
-.. image:: images/sentry2_connection_arduino_i2c.png
+.. image:: images/sentry2_connection_arduino_i2c_en.png
 
 UI - User Interface
 ************************
 
 Sentry2 has two kinds of UI interface: Running and Setting
 
-.. image:: images/sentry2_run_view_and_ui_info.png
+.. image:: images/sentry2_run_view_and_ui_info_en.png
 
 * Running
 
@@ -186,7 +182,7 @@ Sentry2 has two kinds of UI interface: Running and Setting
 UI Setting Page
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/sentry2_ui_3_pages.png
+.. image:: images/sentry2_ui_3_pages_en.png
 
 In the running page, you can click the joystick to the right to enter the UI setting page, which consists of three pages: 
 vision setting, camera setting, and hardware setting 
@@ -238,7 +234,7 @@ Communication Setting
 It is used to set the communication mode between the Sentry2 and the controller, which will be automatically saved after the setting, and it is not necessary to set it again after the next startup. 
 However, when the communication is abnormal, it is necessary to check whether these parameters have been changed. Sometimes, these Settings will be changed after the firmware is updated or reset the registers
 
-.. image:: images/sentry2_set_output_mode.png 
+.. image:: images/sentry2_set_output_mode_en.png 
 
 1. On the running page, click the joystick three times to the right to enter the hardware setting page
  
@@ -269,7 +265,7 @@ USB Setting
 
 Sentry2 can be communication with the computer via the onboard USB port. Its baudrate can be set separately. The data communication is based on "Standard protocol" or "Simple Protocol".
 
-.. image:: images/sentry2_set_usb.png 
+.. image:: images/sentry2_set_usb_en.png 
 
 **Baudrate**：Support “9600、19200、38400、57600、115200、921600、1152000、2000000” baudrate. USB can be disabled if the slider is on the left
 
@@ -282,7 +278,7 @@ Display Setting
 
 It is necessary to mark the recognition results when Sentry2 is running. There are 3 marks: recognition Box, coordinates X-Y and information
 
-.. image:: images/sentry2_set_display.png 
+.. image:: images/sentry2_set_display_en.png 
 
 **Box**: A rectangular box showing the contour range of the measured object, whose size is the width and height of the object, and the position is determined by the center coordinate of the object
 
@@ -301,11 +297,11 @@ LED Setting
 
 The LED in front of the sensor can indicate the detection result. For each frame of image detected, the light will flash once, and the color and brightness of the light can be customized
 
-.. image:: images/sentry2_set_led.png 
+.. image:: images/sentry2_set_led_en.png 
 
 User can set the LED color when the object is "detected" or "undetected" respectively. Each time the joystick is pressed, one color will be changed. The switching sequence is as follows:
 
-.. image:: images/sentry2_led_color_list.png 
+.. image:: images/sentry2_led_color_list_en.png 
 
 
 Black color means LED are turned off
@@ -336,7 +332,7 @@ WiFi Setting
 
 The on-board ESP8285-wifi chip of the Sentry2 realizes data communication with the K210 chip through an internal UART port. When Custom Vision is enabled, the ESP8285 chip will working. The power consumption will be increases
 
-.. image:: images/sentry2_set_wifi.png 
+.. image:: images/sentry2_set_wifi_en.png 
 
 **Baudrate**： Support “9600、74880、115200、921600、1152000、2000000、3000000、4000000” baudrate, WiFi can be disabled if the slider is on the left
 
@@ -351,7 +347,7 @@ Coordinate Setting
 
 Sentry2 supports two coordinate systems: Absolute and Percentage
 
-.. image:: images/sentry2_set_cord.png 
+.. image:: images/sentry2_set_cord_en.png 
 
 **Absolute**： In this mode, the actual coordinate results are returned. Range in horizontal direction is from "0 to 319" and "0 to 239" in the vertical direction. The center point is (160,120). This mode has higher accuracy.
 
@@ -362,14 +358,14 @@ Language Setting
 
 Sentry2 supports two system languages: English and Simplified Chinese.
 
-.. image:: images/sentry2_set_language.png 
+.. image:: images/sentry2_set_language_en.png 
 
 Registers Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sentry2 registers can be set up for: Auto Save, Save REG, Default
 
-.. image:: images/sentry2_set_reg.png 
+.. image:: images/sentry2_set_reg_en.png 
 
 **Auto Save**： Some registers value will be automatically stored if this function is enabled, otherwise, it will automatically reset to the default value after the next startup if it disabled. Default is disabled.
 
@@ -458,7 +454,7 @@ There are several ways to Enable/Disable vision: UI, joystick, and commands
 By UI Settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/sentry2_run_vision_by_ui.png 
+.. image:: images/sentry2_run_vision_by_ui_en.png 
 
 1. Select a vision to be running from the left menus of the Vision setting page
 
@@ -471,7 +467,7 @@ By UI Settings
 By Joystick
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/sentry2_run_vision_by_stick.png 
+.. image:: images/sentry2_run_vision_by_stick_en.png 
 
 1. Short click the joystick up and down to enable or disable a vision. After each vision switch, the previous vision will be closed
 
@@ -502,7 +498,7 @@ Results on the screen
 
 When the image detects the target object, it will be marked on the screen. The meanings of each mark are as follows
 
-.. image:: images/sentry2_vision_result.png 
+.. image:: images/sentry2_vision_result_en.png 
 
 Result by Commands
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

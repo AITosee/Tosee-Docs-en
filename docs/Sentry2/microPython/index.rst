@@ -1,6 +1,6 @@
 .. _chapter_micropython_index:
 
-Sentry-microPython 开发教程
+Sentry-microPython
 ===========================
 
 `Sentry-microPython <https://github.com/AITosee/Sentry-microPython>`_ 为

@@ -1,18 +1,18 @@
 Sentry2
 =======
 
-感谢选择 **Sentry2** 视觉传感器 :D
+Wellcome **Sentry2** Vision Sensor :D
 
-快速上手
+Quick Start
 ------------------------
 
 .. image:: images/sentry2_run_vision_by_stick.png
 
-1. 将 Sentry2 通过 USB 连接至电脑
-2. 上下拨动导航键即可快速切换算法
-3. 将 Sentry2 摄像头面向需要识别的物体，即可看到识别情况
+1. Connect Sentry2 to PC via USB-C cable
+2. Up or Down click the joystick to switch vision
+3. Let Sentry2 face to the object which to be recognized
 
-硬件介绍
+Hardware
 ------------------------
 
 .. toctree::
@@ -20,7 +20,7 @@ Sentry2
 
     Hardware/index
 
-算法介绍
+Vision
 ------------------------
 
 .. toctree::
@@ -28,7 +28,7 @@ Sentry2
 
     Vision/index
 
-WiFi介绍
+WiFi
 ------------------------
 
 .. toctree::
@@ -36,15 +36,15 @@ WiFi介绍
 
     WiFi/index
 
-Sentry-Arduino 开发文档
+Sentry-Arduino
 ------------------------
 
 .. toctree::
     :maxdepth: 2
 
-    ../Sentry/Arduino/index
+    ../Common/Arduino/index
 
-Sentry-Mixly 开发文档
+Sentry-Mixly
 ------------------------
 
 .. toctree::
@@ -52,7 +52,7 @@ Sentry-Mixly 开发文档
 
     Mixly/index
 
-Sentry-Mind+ 开发文档
+Sentry-Mind+
 ------------------------
 
 .. toctree::
@@ -60,7 +60,7 @@ Sentry-Mind+ 开发文档
 
     MindPlus/index
 
-Sentry-MakeCode 开发文档
+Sentry-MakeCode
 ------------------------
 
 .. toctree::
@@ -68,7 +68,7 @@ Sentry-MakeCode 开发文档
 
     MakeCode/index
 
-Sentry-microPython 开发文档
+Sentry-microPython
 ---------------------------
 
 .. toctree::
@@ -76,7 +76,15 @@ Sentry-microPython 开发文档
 
     microPython/index
 
-示例程序
+Sentry-mPython
+---------------------------
+
+.. toctree::
+    :maxdepth: 2
+
+    ../Common/mPython/index
+
+Demo
 ------------------------
 
 .. toctree::
@@ -84,7 +92,7 @@ Sentry-microPython 开发文档
 
     Demo/index
 
-固件升级
+Upgrade
 ------------------------
 
 .. toctree::
@@ -92,7 +100,7 @@ Sentry-microPython 开发文档
 
     Upgrade/index
 
-资源下载
+Download
 ------------------------
 
 .. toctree::
