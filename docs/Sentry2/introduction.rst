@@ -6,7 +6,7 @@ Wellcome **Sentry2** Vision Sensor :D
 Quick Start
 ------------------------
 
-.. image:: images/sentry2_run_vision_by_stick.png
+.. image:: images/sentry2_run_vision_by_stick_en.png
 
 1. Connect Sentry2 to PC via USB-C cable
 2. Up or Down click the joystick to switch vision
