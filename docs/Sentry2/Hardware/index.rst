@@ -8,25 +8,25 @@ Brief
 
 Sentry2 is a vision sensor which is designed by K210 - an advanced 64-bits RISC-V neural network processor. 
 This device integrates a variety of advanced vision algorithms, which can meet the basic vision processing needs.
-The on-board ESP8285-WiFi chip can be programmed in Arduino IDE directly to realize online-recognition, image transmission, AIoT and other applications. 
+The on-board ESP8285-WiFi chip can be programmed in Arduino IDE to realize online-recognition, image transmission, AIoT and other applications. 
 ESP8285 can be used as a controller for K210 which is help for AI programming without external controller.
 
-We offer 2 edition: Enterprise Edition (marked E) and Consumer Edition (marked C).
+We offer 2 editions: Enterprise Edition (marked E) and Consumer Edition (marked C).
 
 Applications: Robots, Smart Cars, Creative Design, STEAM Education, Maker, Toys, AIoT
 
 .. image:: images/sentry2_top_bot_view_en.png
 
 
-**LED**: Different colors of light can reflect different recognition results.
+**LED**: Represents different detection states.
 
-**Camera**: Capture image data. Users can adjust image zoom, white balance, brightness, saturation and other parameters for camera settings.
+**Camera**: Capture image data. User can adjust the image zoom, white balance, brightness, saturation and other parameters for camera.
 
 **WiFi Antenna**: An ESP8285 Wifi Chip can realize online-recognition, image transmission, AIoT applications.
 
 **K210 Processor**: A powerful MCU with a neural network processing unit, dual-core 64-bits RISC-V processor.
 
-**SD Slot**: Support Micro-SD(TF) card for image storage (**Note：some SD card do not support, SPI communication only**)
+**SD Slot**: Support Micro-SD(TF) card for image storage (**Note：Not all the types of SD card are supported, SPI communication only**)
 
 **USB**: The onboard USB-UART chip can directly communicate and control with the computer, and firmware update. 
 (**CAUTION：the USB power supply will be output through the 4pin communication port, DO NOT powered at the same time**)
@@ -231,8 +231,7 @@ Startup              Downward Long Press                 ESP8285 firmware upgrad
 Communication Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is used to set the communication mode between the Sentry2 and the controller, which will be automatically saved after the setting, and it is not necessary to set it again after the next startup. 
-However, when the communication is abnormal, it is necessary to check whether these parameters have been changed. Sometimes, these Settings will be changed after the firmware is updated or reset the registers
+Some output configurations can be set if you want use a controller to communicate to Sentry2.
 
 .. image:: images/sentry2_set_output_mode_en.png 
 
