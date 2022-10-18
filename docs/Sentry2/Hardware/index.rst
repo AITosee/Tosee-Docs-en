@@ -47,7 +47,7 @@ Hardware Parameters
 ========================    ================    ================    ================    ================
 Item                         Unit                Enterprise          Consumer            Note
 ========================    ================    ================    ================    ================
-Voltage                      V                   3.3～5.0             3.3～5.0            DO NOT powered by USB and Communicaion Port at the same time
+Voltage                      V                   3.3～5.0             3.3～5.0            DO NOT powered by USB and Output Port at the same time
 Current                      mA                  190                  150                5V supply and running Face vision 
 Size                         mm                  40×32×12             40x32x12.5         without shell
 Weight                       g                   15                   15                 without shell
@@ -103,8 +103,8 @@ ARM PC                                              C/C++                       
 How to Use
 ----------------
 
-Sentry2 can be connected to the controller via the communication port or to a computer via USB.
-The communication port can be set to the UART or I2C mode, the device address and baudrate can be modified.
+Sentry2 can be connected to a controller via the output port, or connect to computer by a USB cable.
+The output port can be set as UART mode or I2C mode, device address and baudrate can also be modified.
 
 Drivers, firmware, manuals, third-party resources:
 :ref:`download<chapter_download_index>`
@@ -114,7 +114,7 @@ Drivers, firmware, manuals, third-party resources:
 Connect the Controller
 ************************
 
-Pins Definition
+Output Port Pins Definition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: images/sentry2_output_port_info_en.png
@@ -125,7 +125,7 @@ Pins                UART Mode           I2C Mode            Note
 1                   RX                  SDA
 2                   TX                  SCL
 3                   GND                 GND
-4                   VCC                 VCC                 CAUTION!! When the USB is inserted, this port can supply power to external devices. This port cannot be directly connected to batteries. When the USB is inserted, it cannot access the 3.3V system
+4                   VCC                 VCC                 CAUTION!! When the USB is inserted, this port can supply power to external devices. This port cannot be directly connected to battery. When the USB is inserted, it cannot access the 3.3V system
 ================    ================    ================    ================
 
 Connection
@@ -138,10 +138,10 @@ Take Arduino UNO as an example
 
 **NOTE: In UART Mode, make sure your connection is correct: Sentry2 RX - Arduino TX, Sentry2 TX - Arduino RX**
 
-**NOTE: If you use a soft serial port, you can specify other I/O ports. For details, see SoftSerialExample in Arduino**
+**NOTE: If you want use the soft-serial port, you can specify other I/O ports. For details, see SoftSerialExample in Arduino**
 
 **NOTE: Because the RX and TX pins of Arduino UNO share ports with the firmware uploading, it is necessary to disconnect the RX and TX connections during the program uploading, 
-and I2C or soft serial port mode is recommended**
+we suggest to use I2C mode or soft-serial ports for UNO**
 
 
 **I2C Mode**
@@ -151,32 +151,32 @@ and I2C or soft serial port mode is recommended**
 UI - User Interface
 ************************
 
-Sentry2 has two kinds of UI interface: Running and Setting
+Sentry2 has 2 types of UI pages: Running page and Setting page
 
 .. image:: images/sentry2_run_view_and_ui_info_en.png
 
-* Running
+* Running Page
 
-    **Vision Status**: This area is used to display the currently running algorithms
+    **Vision Status**: This area displays the current vision name
 
-    **Image**: Display the image of the camera
+    **Image**: Display images from the camera
 
-    **Marks**: Mark the detected objects, including the detection box, coordinates and information
+    **Marks**: Mark the detected objects, such as detection box, coordinates or informations
 
-    **System Status**: Displays the frame rate, zoom level or wifi status
+    **System Status**: Camera frame rate, zoom level or wifi status
 
 
-* Setting
+* Setting Page
 
-    **Menus**: Toggle the joystick up and down to select menus, and vertical click to enter the setting page 
+    **Menus**: Click the joystick up or down to select menus, and vertical click to enter 
 
-    **Version**: The firmware version and release date
+    **Version**: The firmware version and date
 
     **Brief**: Describes the current menu
 
-    **Buttons**: Interactive buttons. The button will be highlighted or displayed with blue edges if it can be operate currently
+    **Buttons**: Interactive buttons. The button will be highlighted blue edges if it has been selected
 
-    **Tips**: Display some tips for operation instructions
+    **Tips**: Display some tips for operation
 
 
 UI Setting Page
@@ -184,134 +184,132 @@ UI Setting Page
 
 .. image:: images/sentry2_ui_3_pages_en.png
 
-In the running page, you can click the joystick to the right to enter the UI setting page, which consists of three pages: 
+In the running page, you can right click the joystick to enter the UI setting page. There are 3 pages: 
 vision setting, camera setting, and hardware setting 
 
-If you turn the joystick to the left, you will exit the page one by one until you return to the running page
+If you click the joystick to the left, you will exit the current page one by one until you return to the running page
 
-    **Vision Setting**: Enable or Disable visions and configurations 
+    **Vision Setting**: Enable or Disable visions and parameters setting 
 
-    **Camera Setting**: You can setting the camera zoom, white balance, saturation and other camera settings 
+    **Camera Setting**: You can set the camera zoom, white balance, saturation or other camera settings 
 
-    **Hardware Setting**: Used to configure the communication mode, baudrate, device address, light color, language and other parameters to adapt to different usage modes 
+    **Hardware Setting**: Set the output mode, uart baudrate, device address, light color, language and other hardware configurations 
 
 Hardware Setting
 ************************
 
-Joystick Function Definition
+Joystick Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ================    ============================        ================
-Current Mode         Operation                            Function          
+Current Page         Operation                           Brief          
 ================    ============================        ================
-Running              Up Click                            Switch Last Vision
-Running              Down Click                          Switch Next Vision
-Running              Left Click                          Snapshot(When SD is insert)
-Running              Right Click                         Enter setting mode
-Running              Vertical Click                      Save model data(for special visions)
-Running              Upward Long Press                   Zoom In
-Running              Downward Long Press                 Zoom Out
-Running              Leftward Long Press                 On/Off LCD
-Running              Vertical Long Press                 Delete all model data(for special visions)
+Running              Up Click                            Switch the last vision
+Running              Down Click                          Switch the next vision
+Running              Left Click                          Snapshot(When SD card is inserted)
+Running              Right Click                         Enter setting page
+Running              Vertical Click                      Training models (for special visions)
+Running              Upward Long Press                   Camera zoom in
+Running              Downward Long Press                 Camera zoom out
+Running              Leftward Long Press                 Turn On/Off LCD Screen
+Running              Vertical Long Press                 Delete all models (for special visions)
 ...
-Setting              Up Click                            Switch previous menu or button
-Setting              Down Click                          Switch next menu or button
-Setting              Left Click                          Switch previous setting page / back to running page
-Setting              Right Click                         Switch next setting page
-Setting              Vertical Click                      Enter to setting
+Setting              Up Click                            Switch the previous menu or button
+Setting              Down Click                          Switch the next menu or button
+Setting              Left Click                          Switch the previous setting page / back to running page
+Setting              Right Click                         Switch the next setting page
+Setting              Vertical Click                      Select
 ...
-Startup              Upward Press 10 seconds             Restore the default setting
-Startup              Vertical Click                      K210 firmware upgrading mode
-Startup              Downward Long Press                 ESP8285 firmware upgrading mode
+Startup              Upward Press > 10 seconds             Restore the hardware default setting
+Startup              Vertical Click                      Enter K210 firmware upgrading mode
+Startup              Downward Long Press                 Enter ESP8285 firmware upgrading mode
 ================    ============================        ================
 
-*NOTE: Click is short press, Long Press must be hold the button for a long time for at least 2 seconds before release*
+*NOTE: Click is short press, Long Press must be hold the button at least 2 seconds before release*
 
 
-Communication Setting
+Output Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Some output configurations can be set if you want use a controller to communicate to Sentry2.
 
 .. image:: images/sentry2_set_output_mode_en.png 
 
-1. On the running page, click the joystick three times to the right to enter the hardware setting page
+1. On the running page, right click the joystick 3 times to enter the hardware setting page
  
-2. On the "Output" option, press the joystick to enter the settings
+2. On the "Output" option, vertical click the joystick to enter the settings
  
-3. Select "UART" or "I2C" mode. Generally, if the controller cannot support high baudrate for UART mode, 
-   the I2C mode will be faster, which is conducive to improving the frame rate of image processing
+3. Select "UART" or "I2C" mode. Generally, I2C mode is faster which is conducive to improving the frame rate of image processing if your controller cannot support high baudrate UART mode.
 
-4. Choose the "Standard Protocol" or "Simple Protocol" in UART mode. 
-   The standard protocol needs to be developed with the register and driver library, while the simple protocol only needs to send characters through the serial port
+4. Choose the "Standard Protocol" or "Simple Protocol" for UART mode. Generally, select "Standard Protocol" if you want use the driver library.
  
 5. Click ”YES“ and return 
 
-6. Toggle the joystick down to switch to the "Address" menu
+6. Select the "Address" option from the left menus
  
-7. Check the device address, which should be consistent with your program code, press the joystick to enter the setting, 
-   the address can be set to "0x60 ~ 0x63", click "YES" and return
+7. Set the Sentry2 hardware address, "0x60 ~ 0x63", click "YES" and return. Default is: 0x60
 
-8. Enter the "UART" menu if you select UART mode
+8. Enter the "UART" setting page if you select the UART mode
 
-9. Move the slider left or right to set the uart baudrate. The baud rate of "9600, 19200, 38400, 57600, 115200, 921600, 1152000, 2000000" is supported. 
-    The higher baud rate will be conducive to the improvement of the frame rate of image recognition. You need to check the max supported baudrate of your controller. When the communication is abnormal, you can reduce the baudrate
+9. Move the slider left or right to set the uart baudrate: "9600, 19200, 38400, 57600, 115200, 921600, 1152000, 2000000" 
+    The higher baudrate can take shorter time for data transfer which can improve the image frame rate. 
+    You need to check the max baudrate of your controller can be supported. 
+    When the communication is abnormal, you should reduce the baudrate
 
-10. Click the joystick three times to the left to return the running page
+10. Left click the joystick 3 times to return to the running page
 
 USB Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sentry2 can be communication with the computer via the onboard USB port. Its baudrate can be set separately. The data communication is based on "Standard protocol" or "Simple Protocol".
+Sentry2 can be communication with the computer by a USB-C cable. Its baudrate can be set separately. USB mode is based on "Standard protocol" or "Simple Protocol" too.
 
 .. image:: images/sentry2_set_usb_en.png 
 
 **Baudrate**：Support “9600、19200、38400、57600、115200、921600、1152000、2000000” baudrate. USB can be disabled if the slider is on the left
 
-**to UART**：Enable or Disable the data transparent transmission between USB and UART
+**to UART**：Enable or Disable the data transmission between USB and UART
 
-*Tip: If the sent data belongs to the instructions in the Protocol Format, the corresponding instructions will be executed instead of being forwarded through *
+*Tip: If the sent data match to the instructions of the Protocol, the instructions will be executed instead of through output*
 
 Display Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is necessary to mark the recognition results when Sentry2 is running. There are 3 marks: recognition Box, coordinates X-Y and information
+The detection results can be marked when the vision is running. There are 3 marks: detection Box, coordinates X-Y and informations
 
 .. image:: images/sentry2_set_display_en.png 
 
-**Box**: A rectangular box showing the contour range of the measured object, whose size is the width and height of the object, and the position is determined by the center coordinate of the object
+**Box**: A rectangular box showing the detected objects 
 
-**X-Y**: Draw the horizontal and vertical coordinate lines of the measured object, and display their values, X: horizontal position, Y: vertical position, W: object width, H: object height
+**X-Y**: Draw the horizontal and vertical coordinate lines for the detected object, and displays, X: horizontal position, Y: vertical position, W: object width, H: object height
 
 **Info**: Displays information about the object, such as its classification label and name
 
-*Tip: When carrying out multi-result detection, drawing too many marks may reduce the frame rate of image detection, you can properly turn off some marks *
+*Tip: When carrying out multi-result detection, drawing too many marks may reduce the frame rate, you can properly turn off some marks *
 
 *Tip: Some vision do not have all the drawing elements, such as "Line detection" does not draw coordinate lines *
-
-*Tip: If nothing result is displayed on the screen, it may be that the display function is all turned off, and you need to turn on the relevant function *
 
 LED Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The LED in front of the sensor can indicate the detection result. For each frame of image detected, the light will flash once, and the color and brightness of the light can be customized
+There 2 LEDs in front of the hardware can indicate the detection status. The led color will be changed due to the detection results for each frame
 
 .. image:: images/sentry2_set_led_en.png 
 
-User can set the LED color when the object is "detected" or "undetected" respectively. Each time the joystick is pressed, one color will be changed. The switching sequence is as follows:
+User can set the LED color for "detected" state or "undetected" state respectively. 
+Click the joystick to change the color by the follows sequence:
 
 .. image:: images/sentry2_led_color_list_en.png 
 
 
-Black color means LED are turned off
+Black color means the LED is turned off
 
-When the "Detected" and "Undetected" colors are the same, the LED light will remain on and will no longer flicker
+When the "Detected" and "Undetected" colors are the same, the LEDs will keep lighting 
 
-The "Brightness" range is 0 to 15, where 0 is to turn off the light and 15 is the brightest. 
-If it is used as a general indicator only, the brightness can be set to 1 or 2
+The "Brightness" range from 0 to 15, where 0 means turn off the light and 15 is the brightest. 
+Generally, set the brightness to 1 or 2
 
 * Turn Off the LED
-    In some cases, the light may cause interference to the image recognition (such as Color or Blob vision), at this time, the light needs to be turned off. There are two ways to turn off the LED:
+    In some cases, led should be turn off, otherwise, its lighting may cause interference to the image recognition (such as Color or Blob vision). There are two ways to turn off the LED:
     
     1. Set "Detected" and "Undetected" to black
     
@@ -329,48 +327,48 @@ If it is used as a general indicator only, the brightness can be set to 1 or 2
 WiFi Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The on-board ESP8285-wifi chip of the Sentry2 realizes data communication with the K210 chip through an internal UART port. When Custom Vision is enabled, the ESP8285 chip will working. The power consumption will be increases
+The on-board ESP8285-wifi chip of the Sentry2 can be communicated to the K210 chip through an internal UART port. When "Custom Vision" is enabled, the ESP8285 chip will working. 
 
 .. image:: images/sentry2_set_wifi_en.png 
 
 **Baudrate**： Support “9600、74880、115200、921600、1152000、2000000、3000000、4000000” baudrate, WiFi can be disabled if the slider is on the left
 
-**to UART**： Enable or Disable the data transparent transmission between WiFi and UART, 
+**to UART**：Enable or Disable the data transmission between WiFi and UART
 
-**to USB**： Enable or Disable the data transparent transmission between WiFi and USB
+**to USB**：Enable or Disable the data transmission between WiFi and USB
 
-*Tip: If the sent data belongs to the instructions in the Protocol Format, the corresponding instructions will be executed instead of being forwarded through *
+*Tip: If the sent data match to the instructions of the Protocol, the instructions will be executed instead of through output*
 
 Coordinate Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sentry2 supports two coordinate systems: Absolute and Percentage
+Sentry2 supports 2 coordinate systems: Absolute and Percentage
 
 .. image:: images/sentry2_set_cord_en.png 
 
-**Absolute**： In this mode, the actual coordinate results are returned. Range in horizontal direction is from "0 to 319" and "0 to 239" in the vertical direction. The center point is (160,120). This mode has higher accuracy.
+**Absolute**： In this mode, the actual coordinate results are returned. Range from "0 to 319" (horizontal) and "0 to 239" (vertical). The center point is (160,120). This mode has higher accuracy.
 
-**Percentage**： In this mode, the actual coordinate results are quantified to the range of "0 ~ 100". Both range in horizontal direction and vertical direction are from "0 to 100". The center point is (50,50).
+**Percentage**： In this mode, the actual coordinate results are quantified to the range of "0 ~ 100". Both range in horizontal and vertical direction are from "0 to 100". The center point is (50,50).
 
 Language Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sentry2 supports two system languages: English and Simplified Chinese.
+You can change the system languages: English or Chinese.
 
 .. image:: images/sentry2_set_language_en.png 
 
 Registers Setting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sentry2 registers can be set up for: Auto Save, Save REG, Default
+Sentry2 registers operations: Auto Save Mode, Save Register, Default Settings
 
 .. image:: images/sentry2_set_reg_en.png 
 
-**Auto Save**： Some registers value will be automatically stored if this function is enabled, otherwise, it will automatically reset to the default value after the next startup if it disabled. Default is disabled.
+**Auto Save**： Some registers value will be automatically saved if this mode is enabled, otherwise, registers will reset to the default value after the next startup. Generally, this mode should be disabled.
 
 **Save REG**： Save the current register values
 
-**Default**： Restore registers to factory settings. Click this button first and then click "YES" to make it take effect
+**Default**： Restore registers to factory settings. Click this button firstly and then click "YES" 
 
 Camera Setting
 ************************
@@ -378,24 +376,25 @@ Camera Setting
 Digital Zoom
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When you need to see the objects in the distance, you can zoom in or out of the image, and support 1 to 5 levels of adjustment
+You can zoom in the camera for the objects in the distance, support 1 to 5 levels of adjustment
 
 Increasing the zoom will make the object larger, but the field of view will be smaller and you will see less
 
 Reducing the zoom will make the object smaller, but the field of view will be larger, allowing you to see more
 
-User can change the zoom by joystick "upward long press" or "downward long press"
+You also can change the zoom by joystick: Zoom in - upward long press or Zoom out - downward long press
 
 AWB - Auto White Balance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Under different illumination (white light or yellow light), white will have a certain deviation, which will lead to the normal display of other colors. 
-At this time, it is necessary to set the white balance to adjust. There are four modes: Auto, Locked, White and Yellow
+Different light environment (white light or yellow light) may cause white color unbalanced. 
+It is necessary to adjust the white balance. There are four modes: Auto, Locked, White and Yellow
 
-Auto: This mode is the default mode and applies to common scenarios
+Auto: This mode is the default mode and applies to most environment
 
-Lock: When there is a large area of monochromatic background in the image, such as color recognition at close range, the color bias problem will occur in the image, which will lead to color recognition errors. 
-Therefore, it is necessary to lock the white balance before recognition to avoid automatic color adjustment. The method is as follows:
+Lock: When there is a large area of monochromatic background in the image, white is unbalanced which will lead to color recognition errors. 
+Therefore, it is necessary to lock the white balance before recognition to avoid automatic color adjustment. 
+The method is as follows:
 
     1. Face the camera to a white paper and keep a distance of about 20cm
     2. Enter "AWB" menu and select "Lock" mode
@@ -448,38 +447,38 @@ The image will rotate 180 degrees if this is enabled
 Vision Running
 ************************
 
-There are several ways to Enable/Disable vision: UI, joystick, and commands
+There are several ways to Enable/Disable vision: from UI page, click joystick, or by controller commands
 
 By UI Settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: images/sentry2_run_vision_by_ui_en.png 
 
-1. Select a vision to be running from the left menus of the Vision setting page
+1. Select the vision from the left menus of the Vision setting page
 
 2. Some visions can be configured, click "Setting" to enter
 
 3. If the red "Stop" button is displayed at the lower left of the right control area, it means that the algorithm is currently closed. 
-   After clicking it, it will turn to the green "run" button, which means that the algorithm is started. 
-   Click it again and it will turn to the red "Stop" button again.
+   After clicking it, it will change to a green "run" button, which means that the algorithm is started. 
+   Click it again and it will change to the red "Stop" button again.
 
 By Joystick
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: images/sentry2_run_vision_by_stick_en.png 
 
-1. Short click the joystick up and down to enable or disable a vision. After each vision switch, the previous vision will be closed
+1. Short click the joystick up and down to enable or disable a vision. The previous vision will be closed if new vision is running
 
 2. Vision switchover sequence is sorted by Vision-ID
 
 By Commands
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this way, controller needs to read and write registers to enable or disable the vision. We provide the driver libraries for users to use in multiple programming platforms
+In this way, controller needs to read and write registers to enable or disable the vision. We provide the driver libraries for different programming platforms
 
-In UART mode, register reading and writing must according to Standard Protocol or Simple Protocol. For details, see the related sections
+In UART mode, register reading or writing must according to Standard Protocol or Simple Protocol. For details, see the related sections
 
-I2C mode can directly read and write registers
+I2C mode can directly read or write registers
 
 Enable vision:
     
@@ -487,26 +486,22 @@ Enable vision:
        
 2. Write 0x01 to register 0x21-VISIO_CONF1 to enable vision, otherwise, write 0x00 to disable
 
-For details, consult the registers
+For details, see the registers
 
 Vision Result
 ************************
 
-Results on the screen
+Results on The Screen
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When the image detects the target object, it will be marked on the screen. The meanings of each mark are as follows
+The target object will be marked on the screen when it is detected. The meanings of marks:
 
 .. image:: images/sentry2_vision_result_en.png 
 
 Result by Commands
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this way, results can be read out by a controller. We provide the driver libraries for users to use in multiple programming platforms
-
-In UART mode, register reading and writing must according to Standard Protocol or Simple Protocol. For details, see the related sections
-
-I2C mode can directly read and write registers
+Results can be read out by the controller. 
 
 Read results：
     
@@ -533,7 +528,7 @@ Read results：
     0x89        RESULT_DATA5_L8             Result 5, Low 8 bits
     ========    ========================    ========================
 
-For details, consult the registers
+For details, see the registers
 
 Protocol
 ----------------
