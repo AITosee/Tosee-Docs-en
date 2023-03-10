@@ -11,7 +11,7 @@ ESP8285 can be used as a controller for K210 which is help for AI programming wi
 
 
 Development Environment
-------------
+-----------------------
 
 Add ESP8266 Board
 *****************
@@ -69,7 +69,7 @@ Push the Stick button downward and hold it(NOT Vertical Press),
 Click “upload” to start compiling and uploading, 
 hold the Stick button downward until the screen shows the xx% progress.
 
-.. image:: images/esp8285_setup_en_08.jpg
+.. image:: images/esp8285_setup_en_08.png
 
 
 .. image:: images/esp8285_setup_en_09.jpg
@@ -99,7 +99,7 @@ WiFi Demo
 
 
 Bemafa AIoT - Image Upload
-************************
+**************************
 
 :download:`Arduino Code: sentry2_esp8285_bemfa_image_transfer.zip <demo/sentry2_esp8285_bemfa_image_transfer.zip>`
 
@@ -107,7 +107,7 @@ Bemafa AIoT - Image Upload
 
 
 Bemfa AIoT - MQTT for Sentry2
-******************************
+*****************************
 
 :download:`Arduino Code: sentry2_esp8285_bemfa_mqtt_run_vision.zip <demo/sentry2_esp8285_bemfa_mqtt_run_vision.zip>`
 
@@ -121,7 +121,7 @@ Bemfa AIoT - MQTT for Sentry2
 
 
 Baidu AI - Ingredient Classify by URL
-*******************************
+*************************************
 
 :download:`Arduino Code: sentry2_esp8285_baidu_ingredient_classify_by_url.zip <demo/sentry2_esp8285_baidu_ingredient_classify_by_url.zip>`
 
@@ -129,7 +129,7 @@ Baidu AI - Ingredient Classify by URL
 
 
 Baidu AI - Ingredient Classify by Image
-********************************
+***************************************
 
 :download:`Arduino Code: sentry2_esp8285_baidu_ingredient_classify_by_image.zip <demo/sentry2_esp8285_baidu_ingredient_classify_by_image.zip>`
 
@@ -137,7 +137,7 @@ Baidu AI - Ingredient Classify by Image
 
 
 Baidu AI - License Plate
-***************
+************************
 
 :download:`Arduino Code: sentry2_esp8285_baidu_ocr_license_plate_by_image.zip <demo/sentry2_esp8285_baidu_ocr_license_plate_by_image.zip>`
 
@@ -145,7 +145,7 @@ Baidu AI - License Plate
 
 
 Baidu AI - OCR-Optical Character Recognition
-**********************
+********************************************
 
 :download:`Arduino Code: sentry2_esp8285_baidu_ocr_general_basic_by_image.zip <demo/sentry2_esp8285_baidu_ocr_general_basic_by_image.zip>`
 
@@ -153,7 +153,7 @@ Baidu AI - OCR-Optical Character Recognition
 
 
 Baidu AI - General Object Classify
-***********************
+**********************************
 
 :download:`Arduino Code: sentry2_esp8285_baidu_general_by_image.zip <demo/sentry2_esp8285_baidu_general_by_image.zip>`
 
@@ -161,7 +161,7 @@ Baidu AI - General Object Classify
 
 
 Baidu AI - Gesture
-***************
+******************
 
 :download:`Arduino Code: sentry2_esp8285_baidu_gesture_by_image.zip <demo/sentry2_esp8285_baidu_gesture_by_image.zip>`
 
@@ -169,7 +169,7 @@ Baidu AI - Gesture
 
 
 Microsoft Azure - General Object Classify
-**********************
+*****************************************
 
 You need an Azure account to use this demo. Details at Azure Homepage： https://azure.microsoft.com/en-us/
 
@@ -179,7 +179,7 @@ You need an Azure account to use this demo. Details at Azure Homepage： https:/
 
 
 Image Transmission and Remoter
-*************
+******************************
 
 :download:`Arduino Code: sentry2_esp8285_image_transfer_remoter.zip <demo/sentry2_esp8285_image_transfer_remoter.zip>`
 
@@ -188,6 +188,6 @@ Image Transmission and Remoter
 .. image:: images/demo_pic_remoter_02.png
 
 Enable Vision from WiFi Chip
-************************
+****************************
 
 :download:`Arduino Code: sentry2_esp8285_run_vision.zip <demo/sentry2_esp8285_run_vision.zip>`

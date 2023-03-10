@@ -11,17 +11,17 @@ Sentry2 resource
 .. _chapter_download_sdk_index:
 
 Sentry2 Libraries
-----------------
+------------------
 
 ================    ================================    ================================    ================================================   
 Platform            Language                            Controller                          Library                                             
 ================    ================================    ================================    ================================================    
-Arduino             C/C++                                Arduino                            https://github.com/AITosee/Sentry-Arduino/releases
+Arduino             C/C++                                Arduino                            https://github.com/AITosee/Sentry-Arduino/releases  或 :download:`download <../Download/libs/Sentry-Arduino-1.3.3.zip>`
 MakeCode            Graphical                            Micro:bit                          https://github.com/AITosee/pxt-sentry/releases
 Mind+               Graphical, C/C++, MicroPython        Arduino, Micro:bit                 https://github.com/AITosee/ext-sentry/releases
-Mixly               Graphical                            Arduino                            https://github.com/AITosee/Sentry-Mixly/releases
-BXY                 MicroPython                          Micro:bit                          https://github.com/AITosee/Sentry-microPython/releases
-ARM PC              C/C++                                Raspberry Pie, Linux               :download:`Sentry-Arduino-1.2.4_for_linux.zip <../Download/libs/Sentry-Arduino-1.2.4_for_linux.zip>`
+Mixly               Graphical                            Arduino                            https://github.com/AITosee/Sentry-Mixly/releases 或 :download:`download <../Download/libs/Sentry-Mixly-v1.3.6.zip>`
+BXY                 MicroPython                          Micro:bit                          https://github.com/AITosee/Sentry-microPython/releases 或 :download:`download <../Download/libs/Sentry-microPython-1.2.2.zip>`
+ARM PC              C/C++                                Raspberry Pie, Linux               :download:`Sentry-Arduino-1.3.3_for_linux.zip <../Download/libs/Sentry-Arduino-1.3.3_for_linux.zip>`
 ================    ================================    ================================    ================================================ 
 
 
@@ -37,6 +37,7 @@ Enterprise
 Version              Date                Brief               Download
 ================    ================    ================    ================
 V2.2.1               2022.07.20          Enterprise          :download:`download <../Download/firmware/enterprise/vs_main_sentry_k210_v2_2_1_20220720_e.kfpkg>`
+V2.2.3               2022.11.06          Enterprise          :download:`download <../Download/firmware/enterprise/vs_main_sentry_k210_v2_2_3_20221106_e.kfpkg>`
 ================    ================    ================    ================
 
 Consumer
@@ -46,6 +47,7 @@ Consumer
 Version              Date                Brief               Download
 ================    ================    ================    ================
 V2.2.1               2022.07.20          Consumer           :download:`download <../Download/firmware/consumer/vs_main_sentry_k210_v2_2_1_20220720_consumer_e.kfpkg>`
+V2.2.3               2022.11.06          Consumer           :download:`download <../Download/firmware/consumer/vs_main_sentry_k210_v2_2_3_20221106_consumer_e.kfpkg>`
 ================    ================    ================    ================
 
 
@@ -57,15 +59,18 @@ Documents
 ========================================    ================    ================================================================    ================================
 Name                                         Version             Brief                                                               Download
 ========================================    ================    ================================================================    ================================
-Release Note                                 V2.2.1              Release Note (Chinese)                                             :download:`download <../Download/docs/Sentry2更新说明_v2.2.1_2022.07.20.pdf>`
+Release Note                                 V2.2.3              Release Note (Chinese)                                             :download:`download <../Download/docs/Sentry2_released_v2.2.3_2022.11.06.pdf>`
 WiFi Firmware Developing User Guide          V1.1                ESP8285 WiFi chip developing guid                                  :download:`download <../Download/docs/Sentry2 WiFi Firmware Developing User Guide_V1.1.pdf>`
+apriltags-16h5                               16H5                All 16H5 tags                                                      :download:`download <../Download/docs/apriltags-16h5.pdf>`
+apriltags-25h9                               25H9                All 25H9 tags                                                      :download:`download <../Download/docs/apriltags-25h9.pdf>`
+apriltags-36h11                              36H11               All 36H11 tags                                                     :download:`download <../Download/docs/apriltags-36h11.pdf>`
 ========================================    ================    ================================================================    ================================
 
 
 .. _chapter_download_third_party_index:
 
 Third-Part resource
-----------------
+---------------------
 
 ================    ================    ========================    ================    ================
 Name                 Version             Brief                       Resource            Download
