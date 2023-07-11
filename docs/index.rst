@@ -16,7 +16,7 @@ Sentry1: Entry-level vision sensor
    Sentry1/introduction
 
 Sentry2: High-performance vision sensor
---------------------------------
+----------------------------------------
 
 .. toctree::
    :maxdepth: 2

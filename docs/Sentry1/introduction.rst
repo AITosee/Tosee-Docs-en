@@ -1,9 +1,9 @@
 Sentry1
 =======
 
-感谢选择 **Sentry1** 视觉传感器 :D
+Thanks for choosing **Sentry1** vision sensor :D
 
-硬件介绍
+Hardware
 ------------------------
 
 .. toctree::
@@ -11,7 +11,7 @@ Sentry1
 
     Hardware/index
 
-算法介绍
+Vision
 ------------------------
 
 .. toctree::
@@ -19,15 +19,15 @@ Sentry1
 
     Vision/index
 
-Sentry-Arduino 开发文档
+Sentry-Arduino
 ------------------------
 
 .. toctree::
     :maxdepth: 2
 
-    ../Sentry/Arduino/index
+    ../Common/Arduino/index
 
-Sentry-Mixly 开发文档
+Sentry-Mixly
 ------------------------
 
 .. toctree::
@@ -35,7 +35,7 @@ Sentry-Mixly 开发文档
 
     Mixly/index
 
-Sentry-Mind+ 开发文档
+Sentry-Mind+
 ------------------------
 
 .. toctree::
@@ -43,7 +43,7 @@ Sentry-Mind+ 开发文档
 
     MindPlus/index
 
-Sentry-MakeCode 开发文档
+Sentry-MakeCode
 ------------------------
 
 .. toctree::
@@ -51,7 +51,7 @@ Sentry-MakeCode 开发文档
 
     MakeCode/index
 
-Sentry-microPython 开发文档
+Sentry-microPython
 ---------------------------
 
 .. toctree::
@@ -59,23 +59,7 @@ Sentry-microPython 开发文档
 
     microPython/index
 
-示例程序
-------------------------
-
-.. toctree::
-    :maxdepth: 2
-
-    Demo/index
-
-固件升级
-------------------------
-
-.. toctree::
-    :maxdepth: 2
-
-    Upgrade/index
-
-资源下载
+download
 ------------------------
 
 .. toctree::

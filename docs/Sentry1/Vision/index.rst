@@ -1,6 +1,6 @@
 .. _chapter_vs1_vision_index:
 
-算法介绍
+Vision
 ================
 
 简介
